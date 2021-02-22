@@ -21,11 +21,11 @@ class Parameters:
 
     @staticmethod
     def gmail_url():
-        return environ["GMAIL_URL"] if "GMAIL_URL" in environ else "https://gmail.com"
+        return environ["GMAIL_URL"] if "GMAIL_URL" in environ else "https://mail.google.com"
 
     @staticmethod
     def gmail_username():
-        return environ["GMAIL_USERNAME"] if "GMAIL_USERNAME" in environ else "aqa.engineer.test.alekseev.ms"
+        return environ["GMAIL_USERNAME"] if "GMAIL_USERNAME" in environ else "aqa.engineer.test.alekseev.ms@gmail.com"
 
     @staticmethod
     def gmail_password():
