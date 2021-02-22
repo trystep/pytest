@@ -6,4 +6,4 @@
 <li>source env/bin/activate</li>
 <li>pip install -U pip</li>
 <li>pip install -r requirements.txt</li>
-<li>docker-compose up -d</li>
+<li>docker-compose up -d --build</li>
