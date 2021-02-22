@@ -4,16 +4,8 @@ networks:
   selenium-net:
     driver: bridge
 
+# Создаем 2 образа в одной сети. В tests запускаются тесты, selenium нужен для создания среды выполнения тестов
 services:
-  selenium:
-    image: selenium/standalone-chrome:latest
-    volumes:
-      - /dev/shm:/dev/shm
-    networks:
-      - selenium-net
-    environment:
-      - NODE_PORT=4444
-
   tests:
     build:
       context: .
@@ -30,3 +22,12 @@ services:
       - GMAIL_USERNAME=aqa.engineer.test.alekseev.ms
       - GMAIL_PASSWORD=webcreateaccount1
       - GMAIL_URL=https://gmail.com
+
+  selenium:
+    image: selenium/standalone-chrome:latest
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - selenium-net
+    environment:
+      - NODE_PORT=4444
