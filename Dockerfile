@@ -3,8 +3,8 @@ FROM python:3.9
 RUN mkdir -p /tests
 COPY . /tests
 WORKDIR /tests
-RUN pip install -U pip
-RUN pip install pytest selenium allure-pytest
-RUN pip install -r requirements.txt
+RUN pip3 install -U pip
+RUN pip3 install -r requirements.txt
+RUN mkdir allure-results
 # Запускаем тесты, указав папку с результатами тестов через --alluredir=
-CMD pytest --tb=long --alluredir=./allure-results tests/
+CMD pytest --alluredir=./allure-results tests/
