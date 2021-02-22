@@ -1,8 +1,8 @@
 from selenium.webdriver import Remote
 from pytest import fixture
 import allure
-from tests_ui_gmail.page_object_models.LoginPage import LoginPage
-from tests_ui_gmail.parameterization.parametrs import Parameters
+from tests.page_object_models.LoginPage import LoginPage
+from tests.parameterization.parametrs import Parameters
 
 
 @allure.step("Открыть Gmail")
