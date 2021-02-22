@@ -1,7 +1,6 @@
 from selenium.webdriver import Remote
 from pytest import fixture
-import allure
-from tests.page_object_models.LoginPage import LoginPage
+from tests.page_object_models.Pages import *
 from tests.parameterization.parametrs import Parameters
 
 
