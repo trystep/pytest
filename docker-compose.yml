@@ -1,27 +1,71 @@
-version: '3'
-
-networks:
-  selenium-net:
-    driver: bridge
-
+version: "3"
 services:
   tests:
     build:
       context: .
       dockerfile: ./Dockerfile
-    networks:
-      - selenium-net
-
-  selenium-hub:
-    image: FROM selenium/standalone-chrome-debug:latest
-    container_name: selenium-hub
-    ports:
-      - "4444:4444"
+    depends_on:
+      - chrome
+      - edge
+      - firefox
+      - opera
 
   chrome:
-    image: selenium/node-chrome:3.8.1
+    image: selenium/node-chrome:4.0.0-beta-1-20210215
+    volumes:
+      - /dev/shm:/dev/shm
     depends_on:
       - selenium-hub
     environment:
-      - HUB_PORT_4444_TCP_ADDR=selenium-hub
-      - HUB_PORT_4444_TCP_PORT=4444
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6900:5900"
+
+  edge:
+    image: selenium/node-edge:4.0.0-beta-1-20210215
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6901:5900"
+
+  firefox:
+    image: selenium/node-firefox:4.0.0-beta-1-20210215
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6902:5900"
+
+  opera:
+    image: selenium/node-opera:4.0.0-beta-1-20210215
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6903:5900"
+
+  selenium-hub:
+    image: selenium/hub:4.0.0-beta-1-20210215
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
