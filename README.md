@@ -2,6 +2,10 @@
 
 Тестовое задание на Python/Pytest для тестирования UI на позицию AQA Engineer. Алексеев М.С.
 
+<h3>Как запустить выполнение тестов в консоли</h3>
+<li>pip install -r requirements.txt</li>
+<li>pytest --rb=long tests/test_send.py</li>
+
 <h3>Как запустить выполнение тестов в контейнере на локалке?</h3>
 <li>docker-compose up --build --abort-on-container-exit</li>
 
