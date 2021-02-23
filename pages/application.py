@@ -7,11 +7,14 @@ from pages.session import SessionHelper
 from selenium import webdriver
 from webdriver_manager.firefox import GeckoDriverManager
 
+# Список исключений, при которых мы не будем падать и продолжим ждать WebDriverWait
 ignored_exceptions = (NoSuchElementException, StaleElementReferenceException,)
 
-
+# Page Object Models
 class Application:
     def __init__(self, base_url):
+        # Вместо того, чтобы размещать сам файл драйвера в проекте, используем удобный плагин webdriver_manager и
+        # конструкцию типа "название драйвера".install()
         self.wd = webdriver.Firefox(executable_path=GeckoDriverManager().install())
         self.base_url = base_url
         self.session = SessionHelper(self)
