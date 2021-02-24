@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 networks:
   selenium-net:
@@ -8,17 +8,33 @@ services:
   tests:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     depends_on:
-      - selenium
+      - firefox
     networks:
       - selenium-net
 
-  selenium:
-    image: selenium/standalone-firefox
+  firefox:
+    image: selenium/node-firefox:4.0.0-beta-1-20210215
     volumes:
       - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
     networks:
       - selenium-net
-    environment:
-      - NODE_PORT=4444
+    ports:
+      - "6902:5900"
+
+  selenium-hub:
+    image: selenium/hub:4.0.0-beta-1-20210215
+    container_name: selenium-hub
+    networks:
+      - selenium-net
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"

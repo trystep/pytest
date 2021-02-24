@@ -1,4 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
+from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -14,8 +15,9 @@ ignored_exceptions = (NoSuchElementException, StaleElementReferenceException,)
 class Application:
     def __init__(self, base_url):
         # Вместо того, чтобы размещать сам файл драйвера в проекте, используем удобный плагин webdriver_manager и
-        # конструкцию типа "название драйвера".install()
         self.wd = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        # Это нужно для работы GUI приложения в докере - https://github.com/SeleniumHQ/docker-selenium
+        self.wd = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.FIREFOX)
         self.base_url = base_url
         self.session = SessionHelper(self)
 

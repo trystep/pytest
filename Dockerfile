@@ -7,4 +7,4 @@ WORKDIR /tests
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 # Запустим тесты, укажем папку для отчетов alluredir= и выведем список сгенерированных отчетов
-ENTRYPOINT py.test --alluredir=/tmp/allure tests/tests.py && ls /tmp/allure
+ENTRYPOINT pytest --alluredir=/tmp/allure tests/tests.py && ls /tmp/allure
