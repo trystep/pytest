@@ -7,7 +7,7 @@
 <li>source env/bin/activate</li>
 <li>pip install -U pip</li>
 <li>pip install -r requirements.txt</li>
-<li>pytest --alluredir=/tmp/allure tests/tests.py && ls /tmp/allure</li>
+<li>pytest --alluredir=/tmp/allure test/test_gmail.py && ls /tmp/allure</li>
 
 <h3>Как запустить выполнение тестов в контейнере на локалке?</h3>
 TODO::пока не работает, не могу пофиксить ошибку вебдрайвера

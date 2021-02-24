@@ -12,4 +12,4 @@ WORKDIR /tests
 RUN cp geckodriver /usr/local/bin/
 RUN export DISPLAY=:0.0
 RUN pip install -r requirements.txt
-ENTRYPOINT pytest --alluredir=/tmp/allure tests/tests.py && ls /tmp/allure
+ENTRYPOINT pytest --alluredir=/tmp/allure test/test_gmail.py && ls /tmp/allure
