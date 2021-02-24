@@ -10,6 +10,7 @@
 <li>pytest --alluredir=/tmp/allure tests/tests.py && ls /tmp/allure</li>
 
 <h3>Как запустить выполнение тестов в контейнере на локалке?</h3>
+TODO::пока не работает, не могу пофиксить ошибку вебдрайвера
 <li>docker-compose up --build --abort-on-container-exit</li>
 
 <h3>Как это работает?</h3>

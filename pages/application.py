@@ -1,6 +1,8 @@
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
@@ -14,10 +16,14 @@ ignored_exceptions = (NoSuchElementException, StaleElementReferenceException,)
 # Page Object Models
 class Application:
     def __init__(self, base_url):
+        firefox_binary = FirefoxBinary('/usr/bin/firefox')
+        options = Options()
+        options.headless = True
         # Вместо того, чтобы размещать сам файл драйвера в проекте, используем удобный плагин webdriver_manager и
-        self.wd = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        self.wd = webdriver.Firefox(executable_path=GeckoDriverManager().install(), firefox_binary=firefox_binary)
         # Это нужно для работы GUI приложения в докере - https://github.com/SeleniumHQ/docker-selenium
-        self.wd = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.FIREFOX)
+        # TODO::не могу пофиксить ошибку драйвера, чтобы в докере запускать. Надо попробовать другой браузер или спросить совета
+        # self.wd = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.FIREFOX, options=options)
         self.base_url = base_url
         self.session = SessionHelper(self)
 
