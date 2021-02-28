@@ -1,4 +1,4 @@
-# pytest
+# pytest UI
 
 Тестовое задание на Python/Pytest для тестирования UI на позицию AQA Engineer. Алексеев М.С.
 
